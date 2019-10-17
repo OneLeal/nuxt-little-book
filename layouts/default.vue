@@ -1,18 +1,18 @@
 <template>
   <div class="layout-wrap">
-    <Header class="layout-header" />
+    <Head class="layout-header" />
     <div class="mid-section">
       <nuxt />
     </div>
-    <Footer />
+    <Foot />
   </div>
 </template>
 <script>
-  import Header from '../components/layout/header';
-  import Footer from '../components/layout/footer';
+  import Head from '../components/layout/head';
+  import Foot from '../components/layout/foot';
 
   export default {
-      components: { Header, Footer }
+      components: { Head, Foot }
   }
 </script>
 <style>
