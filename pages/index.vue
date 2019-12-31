@@ -12,16 +12,26 @@
     </div>
 
     <div class="home-container">
-      <Container />
-      <el-button @click="loginOut" type="text" class="mt-20">退 出</el-button>
+        <Container />
+        <el-button type="primary" @click="handleNotify">提 示</el-button>
+        <el-button type="info" @click="myNotify">介绍</el-button>
+        <el-button type="warning" @click="elNotify">警 告</el-button>
+        <el-button @click="loginOut" type="text" class="mt-20">退 出</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import Container from '../components/home/container'
+  import Container from '../components/home/container';
+  import notify from '../components/self/notification-1/function';
+  import Notification from '../components/self/notification-1/notification';
+  import Vue from 'vue';
+  import MyNotification from '../components/self/notification-2/index';
 export default {
   components: { Container },
+    created() {
+      Vue.use(MyNotification);
+    },
     beforeMount() {
       let value = localStorage.getItem('testNuxtLocalValue')
         if (value) {
@@ -29,6 +39,10 @@ export default {
         } else {
             this.showAlert('info', '温馨提示', '请先登录', this.jumpToLoginPage)
         }
+    },
+    mounted() {
+      Vue.component(Notification.name, Notification);
+      Vue.prototype.$uiNotify1 = notify;
     },
     methods: {
         jumpToLoginPage() {
@@ -60,6 +74,28 @@ export default {
                 showClose: true,
                 message: msg
             });
+        },
+
+        handleNotify() {
+          this.$uiNotify1({
+            autoClose: 1500,
+            ctx: "你好，奥特曼",
+          });
+        },
+
+        elNotify() {
+            this.$notify({
+                title: '警 告',
+                message: '这是一条不会自动关闭的消息',
+                duration: 3000
+            });
+        },
+
+        myNotify() {
+           this.$myNotify({
+              content: '葡萄美酒夜光杯',
+              autoClose: 4000
+           });
         },
     }
 }
