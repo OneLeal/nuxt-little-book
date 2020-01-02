@@ -1,14 +1,28 @@
 <template>
     <transition name="el-fade-in" @after-leave="afterLeave" @after-enter="afterEnter">
         <div class="notification" :style="style" v-show="visible">
-            <p class="content">{{content}}</p>
-            <div>
-                <el-button
-                        size="small"
-                        type="primary"
-                        @click.stop.prevent="handleClose"
-                >关 闭</el-button>
-            </div>
+            <slot>
+                <div v-if="!isVnode">
+                    <p class="content">{{content}}</p>
+                    <div>
+                        <el-button
+                                size="small"
+                                type="primary"
+                                @click.stop.prevent="handleClose"
+                        >关 闭</el-button>
+                    </div>
+                </div>
+                <div v-else>
+                    <div v-html="content" />
+                    <div>
+                        <el-button
+                                size="small"
+                                type="primary"
+                                @click.stop.prevent="handleClose"
+                        >关 闭</el-button>
+                    </div>
+                </div>
+            </slot>
         </div>
     </transition>
 </template>
@@ -20,6 +34,11 @@
             content: {
                 type: String,
                 required: true
+            },
+
+            isVnode: {
+                type: Boolean,
+                default: false
             },
         },
         data () {

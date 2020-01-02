@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import Music from  '../components/test/music'
   import Container from '../components/home/container';
   import notify from '../components/self/notification-1/function';
   import Notification from '../components/self/notification-1/notification';
@@ -85,15 +86,16 @@ export default {
 
         elNotify() {
             this.$notify({
-                title: '警 告',
-                message: '这是一条不会自动关闭的消息',
-                duration: 3000
+                customClass: 'myStyle',
+                message: this.$createElement(Music),
+                duration: 0,
             });
         },
 
         myNotify() {
            this.$myNotify({
-              content: '葡萄美酒夜光杯',
+               isVnode: true,
+              content: this.$createElement(Music),
               autoClose: 4000
            });
         },
@@ -103,6 +105,14 @@ export default {
 
 <style>
   @import "../style/common.css";
+
+  .myStyle {
+      width: 850px;
+      background-color: #f7f7f7;
+      margin-right: 50%;
+      margin-top: 50px;
+      transform: translateX(50%);
+  }
 
   .home-wrap {
     padding: 20px 0;
