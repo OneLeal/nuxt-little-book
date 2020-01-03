@@ -15,10 +15,6 @@
         <div v-for="item of mid_opts">
             <RadioItem v-model="mid" :value="item.value" @change="handleChangeRadioItem">{{ item.label }}</RadioItem>
         </div>
-
-        <div class="notify-wrap">
-            <el-button type="primary" @click="activeNotify">发送消息</el-button>
-        </div>
     </div>
 </template>
 
@@ -26,8 +22,6 @@
     import UiRadio from '../components/public/ui-radio'
     import CheckBox from '../components/public/my-check-box'
     import RadioItem from '../components/public/ui-radio-item'
-    import notify from '../components/demo/function'
-    import Notification from '../components/demo/notification'
     import Vue from 'vue'
     export default {
         name: "community",
@@ -70,20 +64,7 @@
             handleChangeRadioItem(value) {
                 console.log('已选择台词: ' + value)
             },
-
-            activeNotify() {
-                this.$uiNotify({
-                    ctx: '报告司令官，你的老婆在台湾，没有裤子穿。'
-                })
-            },
         },
-        created() {
-            Vue.component(Notification.name, Notification);
-            Vue.prototype.$uiNotify = notify;
-        },
-        mounted() {
-
-        }
     }
 </script>
 

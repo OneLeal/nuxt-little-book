@@ -26,7 +26,7 @@ const notify = (options) => {
     instance.vm.visible = true;
 
     // 设置高度
-    let verticalOffset = 0;
+    let verticalOffset = 200;
     instances.forEach(item => {
         verticalOffset += item.$el.offsetHeight + 16;
     });
